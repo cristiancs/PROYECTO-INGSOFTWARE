@@ -17,6 +17,14 @@ public class Maquinas {
         return id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }

@@ -1,17 +1,20 @@
 package com.bytecorp.fablab;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bytecorp.fablab.Maquinas;
 import com.bytecorp.fablab.MaquinasRepository;
 
-import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.Optional;
 import org.json.*;
 
 @Controller // This means that this class is a Controller
@@ -38,6 +41,34 @@ public class MaquinasController {
         HashMap respuesta = new HashMap();
         respuesta.put("status", "saved");
         return respuesta;
+    }
+
+    @RequestMapping(value = "/edit/{maquinaId}", method = RequestMethod.POST)
+    public @ResponseBody HashMap EditMaquina(@PathVariable Integer maquinaId, @RequestParam String nombre,
+            @RequestParam String tipo) {
+        Maquinas n = maquinasRepository.findById(maquinaId)
+                .orElseThrow(() -> new IllegalArgumentException("ID not found"));
+
+        if (!nombre.isEmpty()) {
+            n.setNombre(nombre);
+        }
+        if (!tipo.isEmpty()) {
+            n.setTipo(tipo);
+        }
+        maquinasRepository.save(n);
+
+        HashMap respuesta = new HashMap();
+        respuesta.put("status", "Updated");
+        return respuesta;
+    }
+
+    @RequestMapping(value = "/view/{maquinaId}", method = RequestMethod.POST)
+    public @ResponseBody Optional GetMaquina(@PathVariable Integer maquinaId, @RequestParam String nombre,
+            @RequestParam String tipo) {
+        // @ResponseBody means the returned String is the response, not a view name
+        // @RequestParam means it is a parameter from the GET or POST request
+
+        return maquinasRepository.findById(maquinaId);
     }
 
 }
