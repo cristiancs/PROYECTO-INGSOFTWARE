@@ -1,4 +1,4 @@
-package com.bytecorp.fablab;
+package com.bytecorp.fablab.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
