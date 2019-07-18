@@ -13,6 +13,8 @@ public class Reparaciones {
     private Integer id;
     private Integer id_maquina;
     private Integer id_usuario;
+    private Integer id_reportante;
+    private Integer estado;
     private String comentarios;
     private Calendar fecha_fin;
     private Calendar fecha_inicio;
@@ -47,6 +49,10 @@ public class Reparaciones {
 
     public void setUsuario(Integer id_usuario) {
         this.id_usuario = id_usuario;
+    }
+
+    public void setEstado(Integer estado) {
+        this.estado = estado;
     }
 
     public void setComentarios(String comentarios) {

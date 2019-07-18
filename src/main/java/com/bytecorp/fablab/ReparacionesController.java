@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller // This means that this class is a Controller
-@RequestMapping(path = "/Reparaciones", produces = "application/json")
+@RequestMapping(path = "/reparaciones", produces = "application/json")
 public class ReparacionesController {
     @Autowired
     private ReparacionesRepository reparacionesRepository;
@@ -35,8 +35,8 @@ public class ReparacionesController {
 
     @PostMapping(path = "/add")
     public @ResponseBody HashMap<String, String> addTrabajo(@RequestParam Integer id_maquina,
-            @RequestParam Integer id_usuario, @RequestParam String comentarios, @RequestParam String fecha_fin,
-            @RequestParam String fecha_inicio) {
+            @RequestParam Integer id_usuario, @RequestParam Integer estado, @RequestParam String comentarios,
+            @RequestParam String fecha_fin, @RequestParam String fecha_inicio) {
 
         HashMap<String, String> respuesta = new HashMap<String, String>();
 
@@ -66,6 +66,7 @@ public class ReparacionesController {
 
         n.setMaquina(id_maquina);
         n.setUsuario(id_usuario);
+        n.setEstado(estado);
         n.setComentarios(comentarios);
         n.setInicioTrabajo(c_inicio);
         n.setFinTrabajo(c_fin);

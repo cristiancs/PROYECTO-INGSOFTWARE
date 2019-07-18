@@ -35,8 +35,9 @@ public class TrabajosController {
 
     @PostMapping(path = "/add")
     public @ResponseBody HashMap<String, String> addTrabajo(@RequestParam Integer id_maquina,
-            @RequestParam Integer id_usuario, @RequestParam String comentarios, @RequestParam String fecha_fin,
-            @RequestParam String fecha_inicio) {
+            @RequestParam Integer id_encargado, @RequestParam Integer id_solicitante, @RequestParam Integer id_usuario,
+            @RequestParam Integer id_material, @RequestParam Integer contexto_uso, @RequestParam String comentarios,
+            @RequestParam String fecha_fin, @RequestParam String fecha_inicio) {
 
         HashMap<String, String> respuesta = new HashMap<String, String>();
 
@@ -66,6 +67,10 @@ public class TrabajosController {
 
         n.setMaquina(id_maquina);
         n.setUsuario(id_usuario);
+        n.setEncargado(id_encargado);
+        n.setSolicitante(id_solicitante);
+        n.setMaterial(id_material);
+        n.setContexto(contexto_uso);
         n.setComentarios(comentarios);
         n.setInicioTrabajo(c_inicio);
         n.setFinTrabajo(c_fin);

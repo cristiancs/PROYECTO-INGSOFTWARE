@@ -14,8 +14,7 @@ public class Mantenciones {
     private Integer id_maquina;
     private Integer id_usuario;
     private String comentarios;
-    private Calendar fecha_fin;
-    private Calendar fecha_inicio;
+    private Calendar fecha;
 
     public Integer getId() {
         return id;
@@ -33,12 +32,8 @@ public class Mantenciones {
         return comentarios;
     }
 
-    public Calendar getInicioTrabajo() {
-        return fecha_inicio;
-    }
-
-    public Calendar getFinTrabajo() {
-        return fecha_fin;
+    public Calendar getFecha() {
+        return fecha;
     }
 
     public void setMaquina(Integer id_maquina) {
@@ -53,12 +48,8 @@ public class Mantenciones {
         this.comentarios = comentarios;
     }
 
-    public void setInicioTrabajo(Calendar fecha_inicio) {
-        this.fecha_inicio = fecha_inicio;
-    }
-
-    public void setFinTrabajo(Calendar fecha_fin) {
-        this.fecha_fin = fecha_fin;
+    public void setFecha(Calendar fecha) {
+        this.fecha = fecha;
     }
 
 }

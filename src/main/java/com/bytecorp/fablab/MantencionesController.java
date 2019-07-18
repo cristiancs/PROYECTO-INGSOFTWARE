@@ -35,8 +35,7 @@ public class MantencionesController {
 
     @PostMapping(path = "/add")
     public @ResponseBody HashMap<String, String> addTrabajo(@RequestParam Integer id_maquina,
-            @RequestParam Integer id_usuario, @RequestParam String comentarios, @RequestParam String fecha_fin,
-            @RequestParam String fecha_inicio) {
+            @RequestParam Integer id_usuario, @RequestParam String comentarios, @RequestParam String fecha) {
 
         HashMap<String, String> respuesta = new HashMap<String, String>();
 
@@ -44,31 +43,20 @@ public class MantencionesController {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
-        Calendar c_inicio = Calendar.getInstance();
+        Calendar c_fecha = Calendar.getInstance();
         try {
-            Date f_inicio = formatter.parse(fecha_inicio);
-            c_inicio.setTime(f_inicio);
+            Date f_fecha = formatter.parse(fecha);
+            c_fecha.setTime(f_fecha);
         } catch (Exception e) {
             respuesta.put("status", "error");
-            respuesta.put("message", "Failed to parse fecha_inicio");
-            return respuesta;
-        }
-
-        Calendar c_fin = Calendar.getInstance();
-        try {
-            Date f_fin = formatter.parse(fecha_fin);
-            c_fin.setTime(f_fin);
-        } catch (Exception e) {
-            respuesta.put("status", "error");
-            respuesta.put("message", "Failed to parse fecha_fin");
+            respuesta.put("message", "Failed to parse fecha");
             return respuesta;
         }
 
         n.setMaquina(id_maquina);
         n.setUsuario(id_usuario);
         n.setComentarios(comentarios);
-        n.setInicioTrabajo(c_inicio);
-        n.setFinTrabajo(c_fin);
+        n.setFecha(c_fecha);
         mantencionesRepository.save(n);
 
         respuesta.put("status", "saved");
