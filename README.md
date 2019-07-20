@@ -1,6 +1,10 @@
 # Instalación
 
-./mvnw clean install
+Configurar los datos de la BD en src/main/java/com/application.properties
+
+Ejecutar
+
+    ./mvnw clean install
 
 # Ejecución
 
