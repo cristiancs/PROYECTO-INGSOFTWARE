@@ -14,3 +14,5 @@
 
 En trabajos, el contexto_uso corresponde a un ID numérico relacionado con:
 [ID's contexto uso](https://imgur.com/PGkjkwP)
+
+Proyecto realizado utilizando [Amazon Coretto 11.0](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html)
