@@ -1,6 +1,6 @@
 # Instalación
 
-Configurar los datos de la BD en src/main/java/com/application.properties
+Configurar los datos de la BD en src/main/resources/application.properties
 
 Ejecutar
 
