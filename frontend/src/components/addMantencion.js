@@ -3,27 +3,31 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import handleChange from "../helpers/handleChange";
 import objectToFormData from "object-to-formdata";
-
-class addMachine extends Component {
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
+class addMantencion extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
     this.changeValue = this.changeValue.bind(this);
+    this.changeDate = this.changeDate.bind(this);
     this.state = {
       add: {
         id_maquina: "",
         id_usuario: "",
         comentarios: "",
-        fecha_fin: "",
-        fecha_inicio: "",
-        estado: ""
+        fecha: ""
       },
       maquinas: []
     };
   }
   componentDidMount() {
     axios.get("http://localhost:8080/maquinas/").then(response => {
-      this.setState({ maquinas: response.data });
+      this.setState({
+        maquinas: response.data,
+        add: { ...this.state.add, id_maquina: response.data[0].id }
+      });
     });
   }
   onSubmit(e) {
@@ -36,11 +40,13 @@ class addMachine extends Component {
         objectToFormData(this.state.add)
       )
       .then(function(response) {
-        alert("Máquina agregada correctamente");
+        alert("Mantención Registrada correctamente");
         esto.setState({
           add: {
-            nombre: "",
-            tipo: ""
+            id_maquina: this.state.maquinas[0].id,
+            id_usuario: "",
+            comentarios: "",
+            fecha: ""
           }
         });
       })
@@ -51,11 +57,20 @@ class addMachine extends Component {
   changeValue(e) {
     handleChange(e, this, "add");
   }
+  changeDate(date, variable) {
+    console.log(date, variable);
+    this.setState({
+      add: {
+        ...this.state.add,
+        [variable]: moment(date).format("DD-MM-YYYY HH:mm:ss")
+      }
+    });
+  }
   render() {
     const opciones = [];
     this.state.maquinas.forEach(element => {
       opciones.push(
-        <option value={element.id}>
+        <option key={element.id} value={element.id}>
           {element.nombre} ({element.tipo})
         </option>
       );
@@ -71,7 +86,7 @@ class addMachine extends Component {
                 <Form.Label>Máquina</Form.Label>
                 <Form.Control
                   as="select"
-                  name="maquina"
+                  name="id_maquina"
                   onChange={this.changeValue}
                   required
                   value={this.state.add.maquina}
@@ -82,16 +97,44 @@ class addMachine extends Component {
             </Col>
             <Col md="6">
               <Form.Group controlId="email">
-                <Form.Label>Tipo Máquina</Form.Label>
+                <Form.Label>Usuario</Form.Label>
                 <Form.Control
-                  name="tipo"
+                  name="id_usuario"
                   onChange={this.changeValue}
                   required
-                  value={this.state.add.tipo}
+                  value={this.state.add.id_usuario}
+                />
+              </Form.Group>
+            </Col>
+
+            <Col>
+              <Form.Group controlId="fecha">
+                <Form.Label>Fecha</Form.Label>
+                <br />
+                <DatePicker
+                  id="fecha"
+                  name="fecha"
+                  required
+                  className="form-control"
+                  value={this.state.add.fecha}
+                  showTimeSelect
+                  dateFormat="DD-MM-YYYY HH:mm:ss"
+                  onChange={date => this.changeDate(date, "fecha")}
                 />
               </Form.Group>
             </Col>
           </Row>
+          <Form.Group controlId="comentarios">
+            <Form.Label>Comentarios</Form.Label>
+            <Form.Control
+              as="textarea"
+              onChange={this.changeValue}
+              value={this.state.add.comentarios}
+              name="comentarios"
+              required
+              rows="10"
+            />
+          </Form.Group>
 
           <Button type="submit">Registrar</Button>
         </form>
@@ -99,4 +142,4 @@ class addMachine extends Component {
     );
   }
 }
-export default addMachine;
+export default addMantencion;

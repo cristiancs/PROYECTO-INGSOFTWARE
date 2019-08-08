@@ -1,18 +1,16 @@
 import React from "react";
+import logo from "./logo.png"; // Tell Webpack this JS file uses this image
 
-import {
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button
-} from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 
 function Header() {
+  console.log(logo); // /logo.84287d09.png
+
   return (
     <Navbar bg="primary" variant="dark" expand="lg">
-      <Navbar.Brand href="#home">Fablab</Navbar.Brand>
+      <Navbar.Brand href="/">
+        <img src={logo} height="80" alt="Fablab" />
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">

@@ -45,8 +45,12 @@ class addReparacion extends Component {
         alert("Reparación Registrada correctamente");
         esto.setState({
           add: {
-            nombre: "",
-            tipo: ""
+            id_maquina: this.state.maquinas[0].id,
+            id_usuario: "",
+            comentarios: "",
+            fecha_fin: "",
+            fecha_inicio: "",
+            estado: 0
           }
         });
       })
@@ -106,8 +110,8 @@ class addReparacion extends Component {
                 />
               </Form.Group>
             </Col>
-            <div className="Col">
-              <Form.Group controlId="nombre">
+            <div className="col">
+              <Form.Group controlId="estado">
                 <Form.Label>Estado</Form.Label>
                 <Form.Control
                   as="select"
@@ -123,18 +127,18 @@ class addReparacion extends Component {
               </Form.Group>
             </div>
             <Col>
-              <Form.Group controlId="fecha">
+              <Form.Group controlId="fecha_inicio">
                 <Form.Label>Fecha Inicio</Form.Label>
                 <br />
                 <DatePicker
-                  id="fecha"
-                  name="fecha"
+                  id="fecha_inicio"
+                  name="fecha_inicio"
                   required
                   className="form-control"
-                  value={this.state.add.fecha}
+                  value={this.state.add.fecha_inicio}
                   showTimeSelect
                   dateFormat="DD-MM-YYYY HH:mm:ss"
-                  onChange={date => this.changeDate(date, "fecha")}
+                  onChange={date => this.changeDate(date, "fecha_inicio")}
                 />
               </Form.Group>
             </Col>

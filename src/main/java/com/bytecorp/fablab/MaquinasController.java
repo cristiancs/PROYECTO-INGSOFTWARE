@@ -64,9 +64,8 @@ public class MaquinasController {
         return respuesta;
     }
 
-    @RequestMapping(value = "/view/{maquinaId}", method = RequestMethod.POST)
-    public @ResponseBody Optional GetMaquina(@PathVariable Integer maquinaId, @RequestParam String nombre,
-            @RequestParam String tipo) {
+    @RequestMapping(value = "/view/{maquinaId}", method = RequestMethod.GET)
+    public @ResponseBody Optional GetMaquina(@PathVariable Integer maquinaId) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
@@ -74,7 +73,7 @@ public class MaquinasController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public @ResponseBody Iterable<Maquinas> GetMaquina() {
+    public @ResponseBody Iterable<Maquinas> GetMaquinas() {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
