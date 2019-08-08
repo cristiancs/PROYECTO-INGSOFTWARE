@@ -10,6 +10,11 @@ Ejecutar
 
     ./mvnw spring-boot:run
 
+# Frontend
+
+El frontend esta realizado en react js, las instrucciones para su ejecución y el código se encuentran dentro de frontend/ (la ejecución se realiza con npm start)
+
+
 # API Endpoints
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4bb32e7fedc2c0c5391d)
