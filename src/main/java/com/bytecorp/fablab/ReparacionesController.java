@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller // This means that this class is a Controller
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
 @RequestMapping(path = "/reparaciones", produces = "application/json")
 public class ReparacionesController {
     @Autowired

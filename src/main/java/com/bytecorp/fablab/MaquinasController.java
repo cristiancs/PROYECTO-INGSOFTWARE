@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +19,7 @@ import java.util.Optional;
 import org.json.*;
 
 @Controller // This means that this class is a Controller
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
 @RequestMapping(path = "/maquinas", produces = "application/json")
 public class MaquinasController {
     @Autowired
@@ -69,6 +71,14 @@ public class MaquinasController {
         // @RequestParam means it is a parameter from the GET or POST request
 
         return maquinasRepository.findById(maquinaId);
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public @ResponseBody Iterable<Maquinas> GetMaquina() {
+        // @ResponseBody means the returned String is the response, not a view name
+        // @RequestParam means it is a parameter from the GET or POST request
+
+        return maquinasRepository.findAll();
     }
 
 }
